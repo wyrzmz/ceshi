@@ -6,23 +6,23 @@ layout: home
 
 # 当 layout 设置为 home 时，定义主页顶部的内容
 hero:
-  name: "wangyanru"
+  name: "文档管理"
   text: "vitePress"
-  tagline: 我的伟大项目标语
+  tagline: 我的文档
   image:
     src: /assets/home/home.jpeg
     alt: VitePress
   actions:
     - theme: brand
-      text: Markdown 示例
+      text: 文档1
       link: /views/examples/exp
     - theme: alt
-      text: API 示例
+      text: 文档2
       link: /views/examples/exp
 
 # 当 layout 设置为 home 时，定义主页底部特色内容
 features:
-  - icon: icon-gongneng-copy  # 图标
+  - icon: <i class="iconfont icon-gongneng-copy"></i>  # 图标
     title: 特征 A  # 标题
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit  # 详情
     link: /views/examples/exp # 外部内部链接
@@ -41,7 +41,7 @@ const { theme, page, frontmatter } = useData()
 </script>
 
 [//]: # (<pre>{{ frontmatter }}</pre>)
-<i class="iconfont icon-gongneng-copy"></i>
+[//]: # (<i class="iconfont icon-gongneng-copy"></i>)
 
 <style lang="scss">
   :root {
