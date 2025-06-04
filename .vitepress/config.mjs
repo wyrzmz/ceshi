@@ -82,7 +82,7 @@ export default defineConfig(({ command, mode }) => {
     themeConfig: {
       nav: [
         { text: '首页', link: '/' },
-        { text: '示例', link: 'views/examples/markdown' }
+        { text: '示例', link: '/views/examples/markdown' }
       ],
 
       sidebar: [
