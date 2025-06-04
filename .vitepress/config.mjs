@@ -7,14 +7,14 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   return {
     title: "wangyanru", // 站点标题(浏览器tab名称：title)
-    titleTemplate: "blog", // 站点标题描述(浏览器tab名称：title | titleTemplate)
+    titleTemplate: "ceshi", // 站点标题描述(浏览器tab名称：title | titleTemplate)
     description: "xxxxxxx", // 站点的描述 体现在HTML 中的 <meta> 标签。
     // lang: 'en-US', // 语言 <html lang="en-US">
     /**
      * 开发模式下，使用绝对路径
-     * 生产环境下，站点将部署到的 base URL，以 / 开头和结尾，对应https://xiaotaokh.github.io/blog中的blog
+     * 生产环境下，站点将部署到的 base URL，以 / 开头和结尾，对应https://xiaotaokh.github.io/ceshi中的ceshi
      */
-    base: mode === 'production' ? '/blog/' : '/',
+    base: mode === 'production' ? '/ceshi/' : '/',
     // Vite 配置选项
     vite: {
       /**
@@ -64,7 +64,7 @@ export default defineConfig(({ command, mode }) => {
     head: [
       ['link', { rel: 'stylesheet', href: '//at.alicdn.com/t/c/font_4743040_m7ehua33vvr.css' }], // iconfont
       // 网站图标，相对于项目根目录，生产环境下需要base字段前缀
-      ['link', { rel: 'icon', href: `${ mode === 'production' ? '/blog/' : '/' }favicon/favicon.png` }],
+      ['link', { rel: 'icon', href: `${ mode === 'production' ? '/ceshi/' : '/' }favicon/favicon.png` }],
     ],
     /**
      * markdown文件所在的根目录，相对于项目根目录进行设置。不会直接影响 public 文件夹。
