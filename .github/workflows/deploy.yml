@@ -1,68 +1,80 @@
-# 构建 VitePress 站点并将其部署到 GitHub Pages 的示例⼯作流程
-name: ⾃动化部署到GitHub Pages
+# 构建 VitePress 站点并将其部署到 GitHub Pages 的示例工作流程
+
+name: 自动化部署到GitHub Pages
+
 on:
-  # 在针对 `main` 分⽀的推送上运⾏。如果你
-  # 使⽤ `master` 分⽀作为默认分⽀，请将其更改为 `master`
+  # 在针对 `main` 分支的推送上运行。如果你
+  # 使用 `master` 分支作为默认分支，请将其更改为 `master`
   push:
-  branches: [main]
-  # 允许你从 Actions 选项卡⼿动运⾏此⼯作流程
+    branches: [main]
+
+  # 允许你从 Actions 选项卡手动运行此工作流程
   workflow_dispatch:
+
 # 设置 GITHUB_TOKEN 的权限，以允许部署到 GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
-# 只允许同时进⾏⼀次部署，跳过正在运⾏和最新队列之间的运⾏队列
-# 但是，不要取消正在进⾏的运⾏，因为我们希望允许这些⽣产部署完成
+
+# 只允许同时进行一次部署，跳过正在运行和最新队列之间的运行队列
+# 但是，不要取消正在进行的运行，因为我们希望允许这些生产部署完成
 concurrency:
   group: pages
-  cancel-in-progress: false false
+  cancel-in-progress: false
+
 jobs:
-  # 构建⼯作
+  # 构建工作
   build:
-  runs-on: ubuntu-latest
-  steps:
-    - name: 将 GitHub 仓库中的代码 克隆（checkout）到当前的 CI 环境中，供后续的构
-  建、测试、部署等步骤使⽤。
-uses: actions/checkout@v4
-with:
-fetch-depth: 0 # 如果未启⽤ lastUpdated，则不需要
-  - name: 配置 pnpm 包管理⼯具
-uses: pnpm/action-setup@v3 # 如果不使⽤ pnpm，请注释此区域
-with:
-version: 8.15.1
-- name: 缓存 pnpm 依赖，加速构建
-uses: actions/cache@v3
-with:
-path: ~/.pnpm-store # 缓存 pnpm 的依赖存储⽬录
-key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') **/pnpm-lock.yaml') }}
-# 缓存键，基于 pnpm-lock.yaml ⽂件的哈希值⽣成
-restore-keys: | # 可选值，指定在没有完全匹配的缓存时，可以尝试恢复的缓存键。
-  ${{ runner.os }}-pnpm-
-- name: 配置 Node.js 环境
-uses: actions/setup-node@v4
-with:
-node-version: 20.7.0
-cache: pnpm # 或 npm / yarn
-  - name: 设置⻚⾯
-uses: actions/configure-pages@v4
-  - name: 安装项⽬依赖
-run: pnpm install # 或 npm ci / yarn install / bun install
-  - name: 执⾏构建命令（pnpm build）
-run: pnpm build # 或 npm run build / yarn build / bun run build
-  - name: 上传构建后的⽂件夹（docs）作为 GitHub Pages 的构建产物(制品)
-uses: actions/upload-pages-artifact@v3
-with:
-path: docs
-# 部署到 GitHub Pages
-deploy:
-environment:
-name: github-pages url
-url: ${{ steps.deployment.outputs.page_url }}
-needs: build
-runs-on: ubuntu-latest
-name: Deploy
-steps:
-  - name: 部署到GitHub⻚⾯
-id: deployment
-uses: actions/deploy-pages@v4
+    runs-on: ubuntu-latest
+    steps:
+      - name: 将 GitHub 仓库中的代码 克隆（checkout）到当前的 CI 环境中，供后续的构建、测试、部署等步骤使用。
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 如果未启用 lastUpdated，则不需要
+
+      - name: 配置 pnpm 包管理工具
+        uses: pnpm/action-setup@v3 # 如果不使用 pnpm，请注释此区域
+        with:
+          version: 8.15.1
+
+      - name: 缓存 pnpm 依赖，加速构建
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store  # 缓存 pnpm 的依赖存储目录
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}  # 缓存键，基于 pnpm-lock.yaml 文件的哈希值生成
+          restore-keys: | # 可选值，指定在没有完全匹配的缓存时，可以尝试恢复的缓存键。
+            ${{ runner.os }}-pnpm-
+
+      - name: 配置 Node.js 环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.7.0
+          cache: pnpm # 或 npm / yarn
+
+      - name: 设置页面
+        uses: actions/configure-pages@v4
+
+      - name: 安装项目依赖
+        run: pnpm install # 或 npm ci / yarn install / bun install
+
+      - name: 执行构建命令（pnpm build）
+        run: pnpm build # 或 npm run build / yarn build / bun run build
+
+      - name: 上传构建后的文件夹（docs）作为 GitHub Pages 的构建产物(制品)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  # 部署到 GitHub Pages
+  deploy:
+    environment:
+      name: github-pages url
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: 部署到GitHub页面
+        id: deployment
+        uses: actions/deploy-pages@v4
