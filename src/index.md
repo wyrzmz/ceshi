@@ -25,7 +25,7 @@ features:
   - icon: icon-gongneng-copy  # 图标
     title: 特征 A  # 标题
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit  # 详情
-    link: /views/examples/markdown/a  # 外部内部链接
+    link: /views/examples/markdown # 外部内部链接
     linkText: 更多 # 链接提示
     
   - title: 功能 B
@@ -59,9 +59,6 @@ const { theme, page, frontmatter } = useData()
 1. [Home](/) <!-- 将用户导航至根目录下的 index.html -->
 2. [foo](views/examples/markdown/) <!-- 将用户导航至目录 foo 下的 index.html -->
 3. [foo heading](views/examples/markdown/#更多) <!-- 将用户锚定到目录 foo 下的index文件中的一个标题"更多"上 -->
-4. [bar - three](views/examples/markdown/a) <!-- 可以省略扩展名 -->
-5. [bar - three](views/examples/markdown/a.md) <!-- 可以添加 .md -->
-6. [bar - four](views/examples/markdown/a.html) <!-- 或者可以添加 .html -->
 
 | Tables        |      Are      |  Cool |
 | ------------- | :-----------: | ----: |
