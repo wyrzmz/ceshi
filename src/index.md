@@ -6,7 +6,7 @@ layout: home
 
 # 当 layout 设置为 home 时，定义主页顶部的内容
 hero:
-  name: "xiaotaokh"
+  name: "wangyanru"
   text: "vitePress"
   tagline: 我的伟大项目标语
   image:
